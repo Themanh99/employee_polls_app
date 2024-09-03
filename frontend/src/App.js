@@ -1,13 +1,32 @@
-import Button from "./components/Button/Button";
-import Input from "./components/Input/Input";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { Route, Routes } from "react-router-dom";
+import Dashboard from "./pages/Dashboard/Dashboard";
+import Header from "./components/Header/Header";
+import Login from "./pages/Login/Login";
+
+export const PATH = {
+  HOME_URL: "/",
+  LOGIN_URL: "/login",
+  LOGOUT_URL: "/logout"
+}
 
 function App() {
+  const isLoggin = useSelector((state) => Boolean(state.authUser));
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    // dispatch(handleInitialData());
+
+  }, [dispatch]);
   return (
     <div className="App">
-      <div className='flex text-red-600'>
-        <Button type="primary" size="medium">Hehe</Button>
-        <Input size="medium"></Input>
-      </div>
+      {isLoggin && <Header />}
+      <Routes>
+        <Route path={PATH.HOME_URL} element={<Dashboard />} />
+        <Route path={PATH.LOGIN_URL} element={<Login />} />
+        <Route path={PATH.LOGOUT_URL} element={<Login />} />
+      </Routes>
     </div>
   );
 }
