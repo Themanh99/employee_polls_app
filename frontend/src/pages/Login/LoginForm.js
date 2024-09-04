@@ -1,21 +1,22 @@
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { handleUserLogin } from "../../actions/authUserAction";
 
 const LoginForm = () => {
-    // Sample data for the select dropdown
-    const userData = [
-        { id: 1, name: "User 1" },
-        { id: 2, name: "User 2" },
-        { id: 3, name: "User 3" }
-    ];
-
     const [selectedUser, setSelectedUser] = useState("");
-    const [password, setPassword] = useState("");
+    const [password, setPassword] = useState("admin123");
+    const dispatch = useDispatch();
+    const userData = useSelector((state) => state.userReducer);
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        // Handle login logic here
-        console.log("Selected User:", selectedUser);
-        console.log("Password:", password);
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        dispatch(handleUserLogin(selectedUser, password));
+        setSelectedUser("");
+        setPassword("");
+    };
+
+    const handleSelectUser = (event) => {
+        setSelectedUser(event.target.value);
     };
 
     return (
@@ -33,15 +34,19 @@ const LoginForm = () => {
                         <select
                             id="user"
                             value={selectedUser}
-                            onChange={(e) => setSelectedUser(e.target.value)}
+                            onChange={handleSelectUser}
                             className="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
                         >
                             <option value="" disabled>Select a user</option>
-                            {userData.map(user => (
-                                <option key={user.id} value={user.name}>
-                                    {user.name}
-                                </option>
-                            ))}
+                            {Object.values(userData).length > 0 ? (
+                                Object.values(userData).map((user, index) => (
+                                    <option key={`${user.id}+ ${index}`} value={user.id} >
+                                        {user.name}
+                                    </option>
+                                ))
+                            ) : (
+                                <option disabled>No users available</option>
+                            )}
                         </select>
                     </div>
 
@@ -68,12 +73,12 @@ const LoginForm = () => {
                                 }`}
                             disabled={!selectedUser || !password}
                         >
-                            Submit
+                            Login
                         </button>
                     </div>
                 </form>
-            </div>
-        </div>
+            </div >
+        </div >
     );
 };
 

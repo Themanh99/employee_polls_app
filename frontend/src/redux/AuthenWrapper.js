@@ -1,9 +1,9 @@
 import { Navigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { connect, useSelector } from "react-redux";
 
 const AuthenWrapper = ({ children }) => {
     const isAuthenticated = useSelector((state) => Boolean(state.authUser));
-    const currentPath = window.location.pathname;
+    const currentPath = window.location.href.toString().split(window.location.host)[1];
 
     return isAuthenticated ? (
         children
@@ -12,4 +12,8 @@ const AuthenWrapper = ({ children }) => {
     );
 };
 
-export default AuthenWrapper;
+const mapAuthGuard = ({ authedUser }) => ({
+    isAuthenticated: !!authedUser,
+});
+
+export default connect(mapAuthGuard)(AuthenWrapper);

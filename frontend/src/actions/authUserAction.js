@@ -10,9 +10,9 @@ export function loginUser(authUser) {
 
 export function handleUserLogin(username, password) {
     return (dispatch, getState) => {
-        const { users } = getState();
+        const { userReducer } = getState();
 
-        const user = Object.values(users).find(
+        const user = Object.values(userReducer).find(
             (user) => user.id === username && user.password === password
         );
         if (user) {

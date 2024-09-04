@@ -6,7 +6,7 @@ export default function userReducer(state = {}, action) {
         case RECEIVE_ALL_USERS:
             return {
                 ...state,
-                ...action.userReducers,
+                ...action.allUsers,
             };
 
         case ADD_ANSWER_USER: {

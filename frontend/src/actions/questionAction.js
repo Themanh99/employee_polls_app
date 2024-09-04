@@ -1,4 +1,4 @@
-import { saveQuestion, saveQuestionAnswer } from "../service/api";
+import { saveQuestion, saveQuestionAnswer } from "../utils/api";
 import { addAnswerUser, addQuestionUser } from "./userAction";
 
 export const ADD_QUESTION = "ADD_QUESTION";
@@ -6,9 +6,9 @@ export const ADD_ANSWER_QUESTION = "ADD_ANSWER_QUESTION";
 export const RECEIVE_ALL_QUESTIONS = "RECEIVE_ALL_QUESTIONS";
 
 // Action creators
-export const receiveAllQuestions = (allQuestions) => ({
+export const receiveAllQuestions = (questions) => ({
     type: RECEIVE_ALL_QUESTIONS,
-    allQuestions,
+    allQuestions: questions,
 });
 
 const addQuestion = (question) => ({

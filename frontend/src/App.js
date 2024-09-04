@@ -4,6 +4,9 @@ import { Route, Routes } from "react-router-dom";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import Header from "./components/Header/Header";
 import Login from "./pages/Login/Login";
+import { handleInitialData } from "./actions/initQuestion";
+import { Logout } from "./pages/Logout/Logout";
+import AuthenWrapper from "./redux/AuthenWrapper";
 
 export const PATH = {
   HOME_URL: "/",
@@ -16,16 +19,16 @@ function App() {
 
   const dispatch = useDispatch();
   useEffect(() => {
-    // dispatch(handleInitialData());
+    dispatch(handleInitialData());
 
   }, [dispatch]);
   return (
     <div className="App">
       {isLoggin && <Header />}
       <Routes>
-        <Route path={PATH.HOME_URL} element={<Dashboard />} />
-        <Route path={PATH.LOGIN_URL} element={<Login />} />
-        <Route path={PATH.LOGOUT_URL} element={<Login />} />
+        <Route path={PATH.LOGIN_URL} exact element={<Login />} />
+        <Route path={PATH.HOME_URL} element={<AuthenWrapper><Dashboard /></AuthenWrapper>} />
+        <Route path={PATH.LOGOUT_URL} element={<Logout />} />
       </Routes>
     </div>
   );

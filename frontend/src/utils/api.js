@@ -2,9 +2,9 @@ import { _getUsers, _getQuestions, _saveQuestion, _saveQuestionAnswer } from './
 
 export function getInitialData() {
     return Promise.all([_getUsers(), _getQuestions()]).then(
-        ([allUsers, allQuestions]) => ({
-            allUsers,
-            allQuestions,
+        ([users, questions]) => ({
+            users,
+            questions,
         })
     );
 }
