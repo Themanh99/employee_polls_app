@@ -5,13 +5,15 @@ import LoginForm from './LoginForm';
 import Logo from '../../assets/Logo';
 
 export default function Login() {
-    const isAuthenticated = useSelector((state) => !!state.authUser);
+    const isAuthenticated = useSelector((state) => !!state.authUserReducer);
 
     if (isAuthenticated) {
         const urlParams = new URLSearchParams(window.location.search);
-        const redirectUrl = urlParams.get("redirectTo");
+        const redirectUrl = urlParams.get("redirectTo") || "/";
+
         localStorage.setItem('login', isAuthenticated);
-        return <Navigate to={redirectUrl || "/"} />;
+
+        return <Navigate to={redirectUrl} />;
     }
 
     return (

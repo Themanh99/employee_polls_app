@@ -1,19 +1,17 @@
 import { Navigate } from "react-router-dom";
-import { connect, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 const AuthenWrapper = ({ children }) => {
-    const isAuthenticated = useSelector((state) => Boolean(state.authUser));
-    const currentPath = window.location.href.toString().split(window.location.host)[1];
+    // Using useSelector to get the authentication state
+    const isAuthenticated = useSelector((state) => Boolean(state.authUserReducer));
+
+    const currentPath = window.location.pathname + window.location.search;
 
     return isAuthenticated ? (
         children
     ) : (
-        <Navigate to={`/login?redirectTo=${currentPath}`} />
+        <Navigate to={`/login?redirectTo=${encodeURIComponent(currentPath)}`} />
     );
 };
 
-const mapAuthGuard = ({ authedUser }) => ({
-    isAuthenticated: !!authedUser,
-});
-
-export default connect(mapAuthGuard)(AuthenWrapper);
+export default AuthenWrapper;

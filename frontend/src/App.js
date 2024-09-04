@@ -11,11 +11,16 @@ import AuthenWrapper from "./redux/AuthenWrapper";
 export const PATH = {
   HOME_URL: "/",
   LOGIN_URL: "/login",
-  LOGOUT_URL: "/logout"
+  LOGOUT_URL: "/logout",
+  LEADERBOARD_URL: "/leaderboard",
+  QUESTION_URL: "/allquestions/:id",
+  NEWQUESTION_URL: "/addquestion",
+  NOTFOUND: "/404",
+  MORE_URL: "/*",
 }
 
 function App() {
-  const isLoggin = useSelector((state) => Boolean(state.authUser));
+  const isLoggin = useSelector((state) => Boolean(state.authUserReducer));
 
   const dispatch = useDispatch();
   useEffect(() => {
