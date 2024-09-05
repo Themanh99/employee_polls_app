@@ -7,6 +7,8 @@ import Login from "./pages/Login/Login";
 import { handleInitialData } from "./actions/initQuestion";
 import { Logout } from "./pages/Logout/Logout";
 import AuthenWrapper from "./redux/AuthenWrapper";
+import LeaderBoard from "./pages/LeaderBoard/LeaderBoard";
+import NewPoll from "./pages/NewPoll/NewPoll";
 
 export const PATH = {
   HOME_URL: "/",
@@ -33,6 +35,8 @@ function App() {
       <Routes>
         <Route path={PATH.LOGIN_URL} exact element={<Login />} />
         <Route path={PATH.HOME_URL} element={<AuthenWrapper><Dashboard /></AuthenWrapper>} />
+        <Route path={PATH.LEADERBOARD_URL} element={<AuthenWrapper><LeaderBoard /></AuthenWrapper>} />
+        <Route path={PATH.NEWQUESTION_URL} element={<AuthenWrapper><NewPoll /></AuthenWrapper>} />
         <Route path={PATH.LOGOUT_URL} element={<Logout />} />
       </Routes>
     </div>

@@ -5,7 +5,7 @@ export const ADD_QUESTION_USER = "ADD_QUESTION_USER";
 // Action creator: Nhận tất cả người dùng
 export const receiveAllUsers = (users) => ({
     type: RECEIVE_ALL_USERS,
-    allUsers: users,
+    users,
 });
 
 // Action creator: Thêm câu trả lời cho người dùng

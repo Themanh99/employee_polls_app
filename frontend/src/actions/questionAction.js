@@ -8,7 +8,7 @@ export const RECEIVE_ALL_QUESTIONS = "RECEIVE_ALL_QUESTIONS";
 // Action creators
 export const receiveAllQuestions = (questions) => ({
     type: RECEIVE_ALL_QUESTIONS,
-    allQuestions: questions,
+    questions,
 });
 
 const addQuestion = (question) => ({
@@ -25,10 +25,10 @@ const addAnswerQuestion = (author, questionId, answer) => ({
 
 // Thunk actions
 export const handleAddQuestion = (firstOption, secondOption) => async (dispatch, getState) => {
-    const { authUser } = getState();
+    const { authUserReducer } = getState();
 
     try {
-        const question = await saveQuestion(firstOption, secondOption, authUser);
+        const question = await saveQuestion(firstOption, secondOption, authUserReducer);
         dispatch(addQuestion(question));
         dispatch(addQuestionUser(question));
     } catch (error) {
@@ -37,12 +37,12 @@ export const handleAddQuestion = (firstOption, secondOption) => async (dispatch,
 };
 
 export const handleAddAnswer = (questionId, answer) => async (dispatch, getState) => {
-    const { authUser } = getState();
+    const { authUserReducer } = getState();
 
     try {
-        await saveQuestionAnswer(authUser.id, questionId, answer);
-        dispatch(addAnswerQuestion(authUser.id, questionId, answer));
-        dispatch(addAnswerUser(authUser.id, questionId, answer));
+        await saveQuestionAnswer(authUserReducer.id, questionId, answer);
+        dispatch(addAnswerQuestion(authUserReducer.id, questionId, answer));
+        dispatch(addAnswerUser(authUserReducer.id, questionId, answer));
     } catch (error) {
         console.error("Error adding answer:", error);
     }

@@ -6,7 +6,7 @@ export default function userReducer(state = {}, action) {
         case RECEIVE_ALL_USERS:
             return {
                 ...state,
-                ...action.allUsers,
+                ...action.users,
             };
 
         case ADD_ANSWER_USER: {
@@ -29,9 +29,9 @@ export default function userReducer(state = {}, action) {
 
             return {
                 ...state,
-                [author]: {
-                    ...state[author],
-                    allQuestions: [...state[author].allQuestions, qid],
+                [author.id]: {
+                    ...state[author.id],
+                    questions: [...state[author.id].questions, qid],
                 },
             };
         }

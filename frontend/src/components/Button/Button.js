@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Button = ({ type = 'default', size = 'medium', disabled = false, onClick, children }) => {
+const Button = ({ type = 'default', size = 'medium', disabled = false, onClick, children, className }) => {
     let baseClasses = `font-semibold rounded-lg focus:outline-none transition duration-300 ease-in-out`;
 
     let sizeClasses;
@@ -37,7 +37,7 @@ const Button = ({ type = 'default', size = 'medium', disabled = false, onClick, 
         typeClasses += ` opacity-50 cursor-not-allowed`;
     }
 
-    const classes = `${baseClasses} ${sizeClasses} ${typeClasses}`;
+    const classes = `${baseClasses} ${sizeClasses} ${typeClasses} ${className}`;
 
     return (
         <button className={classes} onClick={onClick} disabled={disabled}>

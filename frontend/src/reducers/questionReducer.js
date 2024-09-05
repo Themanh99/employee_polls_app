@@ -6,7 +6,7 @@ export default function questionReducer(state = {}, action) {
         case RECEIVE_ALL_QUESTIONS:
             return {
                 ...state,
-                ...action.allQuestions,
+                ...action.questions,
             };
 
         case ADD_QUESTION:
