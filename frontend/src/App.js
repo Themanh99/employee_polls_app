@@ -12,6 +12,7 @@ import NewPoll from "./pages/NewPoll/NewPoll";
 import PollDetail from "./pages/Dashboard/PollDetail";
 import { loginUser } from "./actions/authUserAction";
 import CryptoJS from "crypto-js";
+import NotFoundPage from "./pages/404/404";
 
 export const PATH = {
   HOME_URL: "/",
@@ -20,7 +21,6 @@ export const PATH = {
   LEADERBOARD_URL: "/leaderboard",
   QUESTION_URL: "/allquestions",
   NEWQUESTION_URL: "/addquestion",
-  NOTFOUND: "/404",
   MORE_URL: "/*",
 }
 
@@ -50,8 +50,8 @@ function App() {
         <Route path={PATH.LEADERBOARD_URL} element={<AuthenWrapper><LeaderBoard /></AuthenWrapper>} />
         <Route path={PATH.NEWQUESTION_URL} element={<AuthenWrapper><NewPoll /></AuthenWrapper>} />
         <Route path={PATH.QUESTION_URL + `/:id`} element={<AuthenWrapper><PollDetail /></AuthenWrapper>} />
-        <Route path={PATH.NOTFOUND} element={<h1>Page not found</h1>} />
         <Route path={PATH.LOGOUT_URL} element={<Logout />} />
+        <Route path={PATH.MORE_URL} element={<NotFoundPage />} />
       </Routes>
     </div>
   );
