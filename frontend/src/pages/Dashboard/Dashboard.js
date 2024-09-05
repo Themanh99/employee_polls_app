@@ -24,13 +24,16 @@ export default function Dashboard() {
 
     const questionsArray = questionList ? Object.values(questionList) : [];
 
-    const answeredQuestions = questionsArray.filter(
+    // Sort by timestamp in descending order
+    const sortedQuestions = questionsArray.sort((a, b) => b.timestamp - a.timestamp);
+
+    const answeredQuestions = sortedQuestions.filter(
         (question) =>
             question.optionOne.votes.includes(authUser.id) ||
             question.optionTwo.votes.includes(authUser.id)
     );
 
-    const newQuestions = questionsArray.filter(
+    const newQuestions = sortedQuestions.filter(
         (question) =>
             !question.optionOne.votes.includes(authUser.id) &&
             !question.optionTwo.votes.includes(authUser.id)

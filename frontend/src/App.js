@@ -20,7 +20,7 @@ export const PATH = {
   LOGOUT_URL: "/logout",
   LEADERBOARD_URL: "/leaderboard",
   QUESTION_URL: "/allquestions",
-  NEWQUESTION_URL: "/addquestion",
+  NEWQUESTION_URL: "/add",
   MORE_URL: "/*",
 }
 

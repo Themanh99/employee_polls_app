@@ -168,6 +168,11 @@ function formatQuestion({ optionOneText, optionTwoText, author }) {
 
 export function _saveQuestion(question) {
     return new Promise((res, rej) => {
+        // Validate jest
+        if (!question.optionOneText || !question.optionTwoText || !question.author) {
+            rej('Invalid data');
+        }
+
         const formattedQuestion = formatQuestion(question)
 
         setTimeout(() => {
@@ -183,6 +188,10 @@ export function _saveQuestion(question) {
 
 export function _saveQuestionAnswer({ authedUser, questionId, answer }) {
     return new Promise((res, rej) => {
+        // Validate jest
+        if (!authedUser || !questionId || !answer) {
+            rej('Invalid data');
+        }
         setTimeout(() => {
             users = {
                 ...users,
