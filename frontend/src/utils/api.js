@@ -16,7 +16,7 @@ export function saveQuestion(optionOneText, optionTwoText, author) {
 export function saveQuestionAnswer(userId, questionId, answer) {
     return _saveQuestionAnswer({
         authedUser: userId,
-        qid: questionId,
+        questionId,
         answer,
     });
 }

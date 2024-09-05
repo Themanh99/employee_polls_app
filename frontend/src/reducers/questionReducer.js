@@ -16,12 +16,12 @@ export default function questionReducer(state = {}, action) {
             };
 
         case ADD_ANSWER_QUESTION: {
-            const { qid, answer, author } = action;
-            const question = state[qid];
+            const { questionId, answer, author } = action;
+            const question = state[questionId];
 
             return {
                 ...state,
-                [qid]: {
+                [questionId]: {
                     ...question,
                     [answer]: {
                         ...question[answer],

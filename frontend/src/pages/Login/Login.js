@@ -3,15 +3,21 @@ import { useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 import LoginForm from './LoginForm';
 import Logo from '../../assets/Logo';
+import CryptoJS from 'crypto-js';
 
 export default function Login() {
-    const isAuthenticated = useSelector((state) => !!state.authUserReducer);
+    const authUser = useSelector((state) => state.authUserReducer);
 
-    if (isAuthenticated) {
+    if (authUser) {
         const urlParams = new URLSearchParams(window.location.search);
         const redirectUrl = urlParams.get("redirectTo") || "/";
+        // Replace this part with your actual authentication logic
+        const user = { id: authUser.id, name: authUser.name, avatarURL: authUser.avatarURL };
 
-        localStorage.setItem('login', isAuthenticated);
+        // Encrypt the user information before storing it in localStorage
+        const encryptedUser = CryptoJS.AES.encrypt(JSON.stringify(user), 'secret_key').toString();
+        localStorage.setItem('authUser', encryptedUser);
+        localStorage.setItem('login', authUser);
 
         return <Navigate to={redirectUrl} />;
     }

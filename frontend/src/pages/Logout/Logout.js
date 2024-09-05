@@ -12,6 +12,7 @@ export const Logout = () => {
         const logoutAndRedirect = async () => {
             await dispatch(handleUserLogout());
             localStorage.setItem("login", false);
+            localStorage.removeItem('authUser');
             navigate(PATH.LOGIN_URL);
         };
 
